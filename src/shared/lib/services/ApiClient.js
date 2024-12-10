@@ -18,29 +18,36 @@ export class ApiClient {
   }
 
   //TODO: скорее всего это лучше преобразовать в switch case
+
   async #handleResponse(response) {
     const contentType = response.headers.get("Content-Type");
     let responseData;
-    if (contentType.includes("application/json")) {
-      responseData = await response.json();
-    } else if (
-      contentType.includes("text/plain") ||
-      contentType.includes("text/html")
-    ) {
-      responseData = await response.text();
-    } else if (
-      contentType.includes("application/xml") ||
-      contentType.includes("text/xml")
-    ) {
-      responseData = await response.text(); // Можно использовать XMLParser для парсинга
-    } else if (
-      contentType.includes("image/") ||
-      contentType.includes("application/octet-stream")
-    ) {
-      responseData = await response.blob(); // Для изображений или бинарных данных
-    } else {
-      responseData = await response.text();
+
+    switch (true) {
+      case contentType.includes("application/json"):
+        responseData = await response.json();
+        break;
+
+      case contentType.includes("text/plain"):
+      case contentType.includes("text/html"):
+        responseData = await response.text();
+        break;
+
+      case contentType.includes("application/xml"):
+      case contentType.includes("text/xml"):
+        responseData = await response.text();
+        break;
+
+      case contentType.includes("image/"):
+      case contentType.includes("application/octet-stream"):
+        responseData = await response.blob();
+        break;
+
+      default:
+        responseData = await response.text();
+        break;
     }
+
     return responseData;
   }
 
