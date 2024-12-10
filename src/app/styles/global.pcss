@@ -1,0 +1,37 @@
+html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font: var(--baseFontWeight) var(--baseFontSize) / var(--baseLineHeight)
+    var(--baseFontFamily);
+}
+
+main {
+  margin: 0 auto;
+  width: 170rem;
+  margin-top: 15rem;
+}
+
+/* stylelint-disable-next-line selector-class-pattern */
+.fancybox__backdrop {
+  /* stylelint-disable-next-line custom-property-pattern */
+  --fancybox-bg: #0003;
+}
+
+.mapSection {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 18.75rem;
+}
+
+.mapBtnGroup {
+  width: 18.5rem;
+  margin-left: 3rem;
+  display: flex;
+  flex-direction: column;
+
+  & button {
+    margin-bottom: 1rem;
+    padding: 1.5rem 2rem;
+  }
+}
